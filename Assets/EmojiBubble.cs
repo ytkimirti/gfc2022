@@ -62,8 +62,6 @@ public class EmojiBubble : MonoBehaviour
     {
         currScale = bubbleSprite.size / bubbleScaleMult;
         defaultScale = currScale;
-
-        FadeIn();
     }
     void Update()
     {
@@ -208,6 +206,10 @@ public class EmojiBubble : MonoBehaviour
 
             yield return new WaitForSeconds(emojiShowDelay);
         }
+
+        yield return new WaitForSeconds(5f);
+        
+        FadeOut();
     }
 
 

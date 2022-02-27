@@ -12,8 +12,12 @@ public enum PersonState
 }
 public class Person : MonoBehaviour
 {
+    public bool isMom;
+    public bool isSecondTime;
+    
     [Header("Talk")]
     public DialogueData dialogue;
+    public DialogueData dialogue2;
 
     public EmojiBubble bubble;
     
@@ -44,10 +48,16 @@ public class Person : MonoBehaviour
         defaultShadowScale = shadowSprite.transform.localScale;
     }
 
-    public void Talk()
+    public void ShutUp()
     {
         isJumping = false;
-        bubble.Talk(dialogue);
+    }
+
+    public void Talk()
+    {
+        bubble.Talk(isSecondTime ? dialogue2 : dialogue);
+        isSecondTime = true;
+        isJumping = false;
     }
     
     public void ClickEffect()
