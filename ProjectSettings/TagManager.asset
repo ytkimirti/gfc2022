@@ -47,6 +47,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Particle
+    uniqueID: 545313981
+    locked: 0
   - name: Bubble
     uniqueID: 821925917
+    locked: 0
+  - name: UI
+    uniqueID: 1559792839
     locked: 0

@@ -130,6 +130,11 @@ public class EmojiBubble : MonoBehaviour
         ShowText(dialogueToShow.sprites.Select(x => x.sprite).ToArray());        
     }
 
+    public void Talk(DialogueData data)
+    {
+        ShowText(data.sprites.Select(x => x.sprite).ToArray());
+    }
+
     public void ShowText(Sprite[] text)
     {
         if (showerEnumerator != null)

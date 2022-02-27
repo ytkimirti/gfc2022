@@ -12,6 +12,12 @@ public enum PersonState
 }
 public class Person : MonoBehaviour
 {
+    [Header("Talk")]
+    public DialogueData dialogue;
+
+    public EmojiBubble bubble;
+    
+    
     [Header("State")]
     public bool isJumping;
     public PersonState animationState;
@@ -37,7 +43,12 @@ public class Person : MonoBehaviour
         defaultShadowColor = shadowSprite.color;
         defaultShadowScale = shadowSprite.transform.localScale;
     }
-    
+
+    public void Talk()
+    {
+        isJumping = false;
+        bubble.Talk(dialogue);
+    }
     
     public void ClickEffect()
     {
@@ -53,6 +64,8 @@ public class Person : MonoBehaviour
 
         if (isJumping)
             animationState = PersonState.Jumping;
+        else
+            animationState = PersonState.Idle;
         
         spriteAnimator.SetInteger(StateString, (int)animationState);
         
