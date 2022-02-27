@@ -7,12 +7,13 @@ using NaughtyAttributes;
 using Quaternion = UnityEngine.Quaternion;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
+using System.Linq;
 
 public class EmojiBubble : MonoBehaviour
 {
     public bool isOpen;
     public bool isShowing;
-    public string textToShow;
+    public DialogueData dialogueToShow;
 
     public Vector2 currScale;
     public Vector2 defaultScale;
@@ -126,10 +127,10 @@ public class EmojiBubble : MonoBehaviour
     [Button]
     public void TestText()
     {
-        ShowText(textToShow);        
+        ShowText(dialogueToShow.sprites.Select(x => x.sprite).ToArray());        
     }
 
-    public void ShowText(string text)
+    public void ShowText(Sprite[] text)
     {
         if (showerEnumerator != null)
             StopCoroutine(showerEnumerator);
@@ -145,7 +146,7 @@ public class EmojiBubble : MonoBehaviour
             StopCoroutine(showerEnumerator);
     }
 
-    IEnumerator ShowTextEnum(string text)
+    IEnumerator ShowTextEnum(Sprite[] text)
     {
         int x = 0;
         int y = 0;
@@ -153,37 +154,30 @@ public class EmojiBubble : MonoBehaviour
 
         if (currEmojis.Count > 0)
         {
-            print($"Got in the middle of a showing EmojiCount {currEmojis.Count} Fading out");
             FadeOut();
             isOpen = false;
             yield return new WaitForSeconds(startAnimationSpeed * 1.3f);
         }
         if (!isOpen)
         {
-            print("Got here but it's not faded in. Fading in...");
             FadeIn();
             yield return new WaitForSeconds(startAnimationSpeed * 1.3f);
         }
         
         for (int i = 0; i < text.Length; i++)
         {
-            if (text[i] == 'n')
+            if (text[i] == GameManager.main.newlineEmoji)
             {
                 y++;
                 x = 0;
                 continue;
             }
-
-            if (text[i] == ' ')
+            else if (text[i] == GameManager.main.waitEmoji)
             {
                 yield return new WaitForSeconds(spaceWaitDelay);
                 continue;
             }
-            if (x > 5)
-            {
-                x = 0;
-                y++;
-            }
+
 
             currRowCount = y;
 
@@ -193,24 +187,27 @@ public class EmojiBubble : MonoBehaviour
                 
             currScale = defaultScale + new Vector2(emojiScale.x * maxX, emojiScale.y * y);
 
-            AddEmoji(pos, text[i].ToString());
+            Sprite sprite = text[i];
+
+            if (sprite == GameManager.main.spaceEmoji)
+                sprite = null;
+            
+            AddEmoji(pos, sprite);
 
             x++;
+            if (x > 5)
+            {
+                x = 0;
+                y++;
+            }
 
             yield return new WaitForSeconds(emojiShowDelay);
         }
     }
 
-    [Button()]
-    public void AddTestEmoji()
-    {
-        AddEmoji(Vector2.zero, "a");
-    }
 
-    void AddEmoji(Vector2 pos, string emojiName)
+    void AddEmoji(Vector2 pos, Sprite sprite)
     {
-        Sprite sprite = GameManager.main.FindEmoji(emojiName);
-        
         GameObject emojiGo = Instantiate(emojiPrefab, pos, Quaternion.identity, emojiHolder);
 
         emojiGo.transform.localPosition = pos + Vector2.left * emojiShowOffset;

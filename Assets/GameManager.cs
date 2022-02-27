@@ -5,7 +5,10 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public Sprite[] emojis;
+    [Header("Special Emojis")]
+    public Sprite waitEmoji;
+    public Sprite newlineEmoji;
+    public Sprite spaceEmoji;
 
     public static GameManager main;
 
@@ -16,20 +19,5 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        
-    }
-
-    public Sprite FindEmoji(string str)
-    {
-        foreach (var s in emojis)
-        {
-            if (s.name == str)
-            {
-                return s;
-            }
-        }
-
-        return null;
-        
     }
 }
