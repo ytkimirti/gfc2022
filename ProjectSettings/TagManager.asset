@@ -38,6 +38,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Shadow
+    uniqueID: 2045371639
+    locked: 0
+  - name: Human
+    uniqueID: 1617384321
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Bubble
+    uniqueID: 821925917
     locked: 0
