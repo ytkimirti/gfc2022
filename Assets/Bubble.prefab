@@ -149,7 +149,7 @@ MonoBehaviour:
   currRowCount: 0
   bubbleScaleMult: 1.610441
   emojiScale: {x: 0.8, y: 0.8}
-  emojiShowDelay: 0.4
+  emojiShowDelay: 0.8
   emojiShowSpeed: 0.4
   emojiShowOffset: 0.5
   spaceWaitDelay: 0.5
@@ -169,7 +169,7 @@ SortingGroup:
   m_GameObject: {fileID: 1430448791709187240}
   m_Enabled: 1
   m_SortingLayerID: 821925917
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
 --- !u!1 &1430448791862782391
 GameObject:

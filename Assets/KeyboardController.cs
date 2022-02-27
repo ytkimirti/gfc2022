@@ -47,8 +47,14 @@ public class KeyboardController : MonoBehaviour
     [Button()]
     public void FadeOut()
     {
+        
+        rect.DOAnchorPosY(-rect.sizeDelta.y * 2, 0.6f).SetEase(Ease.OutQuart);
+    }
+
+    public void Send()
+    {
+        FadeOut();
         if (CameraController.main.currPerson)
             CameraController.main.currPerson.Talk();
-        rect.DOAnchorPosY(-rect.sizeDelta.y * 2, 0.6f).SetEase(Ease.OutQuart);
     }
 }

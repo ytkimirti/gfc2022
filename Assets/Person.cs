@@ -19,6 +19,11 @@ public class Person : MonoBehaviour
     public DialogueData dialogue;
     public DialogueData dialogue2;
 
+    public bool dialogueListed;
+    public DialogueData[] dialogueList;
+    public KeyCode keyToSpeak;
+    private int dialogueListIndex = 0;
+
     public EmojiBubble bubble;
     
     
@@ -55,7 +60,19 @@ public class Person : MonoBehaviour
 
     public void Talk()
     {
-        bubble.Talk(isSecondTime ? dialogue2 : dialogue);
+        if (dialogueListed)
+        {
+            bubble.Talk(dialogueList[dialogueListIndex]);
+            dialogueListIndex++;
+        }
+        else
+        {
+            if (dialogue2)
+                bubble.Talk(isSecondTime ? dialogue2 : dialogue);
+            else
+                bubble.Talk(dialogue);    
+        }
+        
         isSecondTime = true;
         isJumping = false;
     }
@@ -66,6 +83,11 @@ public class Person : MonoBehaviour
     }
     void Update()
     {
+        if (Input.GetKeyDown(keyToSpeak))
+        {
+            Talk();
+        }
+        
         float shadowPercent = Mathf.Clamp(spriteHolder.transform.localPosition.y / maxHeight, 0, 1); 
         shadowSprite.color = Color.Lerp(defaultShadowColor, new Color(0, 0, 0, 0), shadowPercent);
         shadowSprite.transform.localScale = defaultShadowScale * (1 - shadowPercent);
@@ -78,6 +100,5 @@ public class Person : MonoBehaviour
             animationState = PersonState.Idle;
         
         spriteAnimator.SetInteger(StateString, (int)animationState);
-        
     }
 }

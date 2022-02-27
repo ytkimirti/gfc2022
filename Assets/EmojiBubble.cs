@@ -14,6 +14,7 @@ public class EmojiBubble : MonoBehaviour
     public bool isOpen;
     public bool isShowing;
     public DialogueData dialogueToShow;
+    public bool randomDelayWhenTalking = false;
 
     public Vector2 currScale;
     public Vector2 defaultScale;
@@ -77,6 +78,7 @@ public class EmojiBubble : MonoBehaviour
     {
         isOpen = true;
         bubbleSprite.DOFade(1, startAnimationSpeed).From(0);
+        bubbleHeightHolder.DOKill();
         bubbleHeightHolder.transform.DOLocalMoveY(0, startAnimationSpeed).From(startAnimationHeight);
     }
 
@@ -101,6 +103,7 @@ public class EmojiBubble : MonoBehaviour
     void FadeOut()
     {
         bubbleSprite.DOFade(0, startAnimationSpeed).OnComplete(OnFadeOutComplete);
+        bubbleHeightHolder.DOKill();
         bubbleHeightHolder.transform.DOLocalMoveY(startAnimationHeight, startAnimationSpeed);
 
         if (currEmojis.Count > 0)
@@ -151,6 +154,8 @@ public class EmojiBubble : MonoBehaviour
 
     IEnumerator ShowTextEnum(Sprite[] text)
     {
+        if (randomDelayWhenTalking)
+            yield return new WaitForSeconds(Random.Range(0, 1f));
         int x = 0;
         int y = 0;
         int maxX = 0;
@@ -169,6 +174,8 @@ public class EmojiBubble : MonoBehaviour
         
         for (int i = 0; i < text.Length; i++)
         {
+            bubbleSprite.DOFade(1, 0.5f);
+            bubbleHeightHolder.transform.DOLocalMoveY(0, startAnimationSpeed);
             if (text[i] == GameManager.main.newlineEmoji)
             {
                 y++;
@@ -177,7 +184,8 @@ public class EmojiBubble : MonoBehaviour
             }
             else if (text[i] == GameManager.main.waitEmoji)
             {
-                yield return new WaitForSeconds(spaceWaitDelay);
+                if (!Input.GetKey(KeyCode.C))
+                    yield return new WaitForSeconds(spaceWaitDelay);
                 continue;
             }
 
@@ -203,12 +211,18 @@ public class EmojiBubble : MonoBehaviour
                 x = 0;
                 y++;
             }
-
-            yield return new WaitForSeconds(emojiShowDelay);
+            if (!Input.GetKey(KeyCode.C))
+                yield return new WaitForSeconds(emojiShowDelay);
         }
 
-        yield return new WaitForSeconds(5f);
-        
+        // yield return new WaitForSeconds(5f);
+
+        while (true)
+        {
+            if (Input.GetKey(KeyCode.X))
+                break;
+            yield return new WaitForEndOfFrame();
+        }
         FadeOut();
     }
 
