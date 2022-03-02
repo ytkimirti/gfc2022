@@ -1,6 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
+using Quaternion = UnityEngine.Quaternion;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 public class Bubble : MonoBehaviour
 {
@@ -15,7 +19,7 @@ public class Bubble : MonoBehaviour
     public Vector2 bubbleTopRightPadding;
 
     
-    public BubbleCell[] currentCells;
+    public List<BubbleCell> currentCells;
 
     public float scaleLerpSpeed;
 
@@ -32,13 +36,23 @@ public class Bubble : MonoBehaviour
 
     public void AddCell(GameObject prefab)
     {
-                
+        GameObject go = Instantiate(prefab, transform.position, Quaternion.identity, cellHolderTrans);
+
+        BubbleCell bc = go.GetComponent<BubbleCell>();
+        
+        currentCells.Add(bc);
+    }
+
+    public void DestroyCells()
+    {
+        foreach (BubbleCell cell in currentCells)
+        {
+            Destroy(cell.gameObject);
+        }
     }
 
     void Update()
     {
-        currentCells = GetComponentsInChildren<BubbleCell>();
-
         Vector2 newHolderScale = RepositionCells();
 
         currHolderScale = Vector3.Lerp(currHolderScale, (Vector3)newHolderScale + Vector3.forward, Time.deltaTime * scaleLerpSpeed);
@@ -60,11 +74,11 @@ public class Bubble : MonoBehaviour
         
         float maxCurrWidth = curr.x;
 
-        for (int i = 0; i < currentCells.Length; i++)
+        for (int i = 0; i < currentCells.Count; i++)
         {
             BubbleCell cell = currentCells[i];
             BubbleCell nextCell = null;
-            if (i != currentCells.Length - 1)
+            if (i != currentCells.Count - 1)
                 nextCell = currentCells[i + 1];
 
             cell.transform.localPosition = new Vector2(curr.x + cell.cellWidth / 2, curr.y - cellHeight / 2);
