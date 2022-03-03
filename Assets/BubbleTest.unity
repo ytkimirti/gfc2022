@@ -1046,7 +1046,7 @@ MonoBehaviour:
   verticalSpacing: 0.2
   cellHeight: 1
   maxBubbleWidth: 4
-  defaultScreenTime: 0
+  defaultScreenTime: 0.74
   cellFadeDistance: 0.3
   cellFadeSpeed: 0.4
   bubbleFadeHeight: 0.7
