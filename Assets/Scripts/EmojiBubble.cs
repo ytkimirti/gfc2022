@@ -124,17 +124,6 @@ public class EmojiBubble : MonoBehaviour
         bubbleSprite.size = currScale * bubbleScaleMult;
         currRowCount = 0;
     }
-    
-    [Button]
-    public void TestText()
-    {
-        ShowText(dialogueToShow.sprites.Select(x => x.sprite).ToArray());        
-    }
-
-    public void Talk(DialogueData data)
-    {
-        ShowText(data.sprites.Select(x => x.sprite).ToArray());
-    }
 
     public void ShowText(Sprite[] text)
     {

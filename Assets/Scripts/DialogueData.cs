@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -5,10 +6,10 @@ using UnityEngine;
 
 public class DialogueData : MonoBehaviour
 {
-    public List<SpriteRenderer> sprites;
+    public List<BubbleCell> cells;
     void Start()
     {
-        var childs = GetComponentsInChildren<SpriteRenderer>().ToList();
+        var childs = GetComponentsInChildren<BubbleCell>().ToList();
         
         childs.Sort((a, b) =>
         {
@@ -20,7 +21,13 @@ public class DialogueData : MonoBehaviour
             return (int) (diff * 10000);
         });
 
-        sprites = childs;
+        cells = childs;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawWireSphere(transform.position, 0.2f);
     }
 
     void Update()

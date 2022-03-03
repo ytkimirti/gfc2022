@@ -58,25 +58,6 @@ public class Person : MonoBehaviour
         isJumping = false;
     }
 
-    public void Talk()
-    {
-        if (dialogueListed)
-        {
-            bubble.Talk(dialogueList[dialogueListIndex]);
-            dialogueListIndex++;
-        }
-        else
-        {
-            if (dialogue2)
-                bubble.Talk(isSecondTime ? dialogue2 : dialogue);
-            else
-                bubble.Talk(dialogue);    
-        }
-        
-        isSecondTime = true;
-        isJumping = false;
-    }
-    
     public void ClickEffect()
     {
         spriteAnimator.transform.DOPunchScale(Vector3.one * clickScaleAmount, 0.2f);
@@ -85,7 +66,7 @@ public class Person : MonoBehaviour
     {
         if (Input.GetKeyDown(keyToSpeak))
         {
-            Talk();
+
         }
         
         float shadowPercent = Mathf.Clamp(spriteHolder.transform.localPosition.y / maxHeight, 0, 1); 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
@@ -8,10 +9,12 @@ using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 using NaughtyAttributes;
 using UnityEditor;
+using UnityEngineInternal;
 
 public class Bubble : MonoBehaviour
 {
     public bool isOpen = false;
+    public bool isTransitioning = false;
     [Space]
     public Vector2 parentScale;
     public bool isOnRight;
@@ -31,40 +34,64 @@ public class Bubble : MonoBehaviour
     public float horizontalSpacing;
     public float verticalSpacing;
     public float cellHeight;
+    public float defaultCellWidth;
     public float maxBubbleWidth;
+    private float defaultSpriteScale;
+    private Vector2 defaultSpriteInnerScale;
 
     private Vector2 currHolderScale;
 
     [Header("Animation Values")]
     public float defaultScreenTime;
     [Space]
-    public float cellFadeDistance;
-    public float cellFadeSpeed;
     public float bubbleFadeHeight;
     public float bubbleFadeSpeed;
-    
-    
+
+    [Header("Talking")]
+    public bool isTalking;
+    public BubbleCell[] currDialogue;
+    private int currDialogueIndex;
+    private float talkTimer;
 
     [Header("References")]
+    public Transform bubbleParentHolderTrans;
     public Transform cellHolderTrans;
     public Transform bubbleFadeHolderTrans;
+
+    private void Start()
+    {
+        defaultSpriteScale = bubbleSprite.transform.localScale.x;
+        defaultSpriteInnerScale = bubbleSprite.size;
+    }
 
     public void AddCell(GameObject prefab)
     {
         GameObject go = Instantiate(prefab, transform.position, Quaternion.identity, cellHolderTrans);
 
         BubbleCell bc = go.GetComponent<BubbleCell>();
+
+        AddCell(bc);
+    }
+    public void AddCell(BubbleCell bc)
+    {
+        if (bc.isEmoji)
+            bc.cellWidth = defaultCellWidth;
         
-        currentCells.Add(bc);
+        bc.FadeIn();
+        
+        currentCells.Add(bc);        
     }
 
     public void DisableBubble()
     {
+        isTransitioning = false;
         bubbleSprite.gameObject.SetActive(false);
         foreach (BubbleCell cell in currentCells)
         {
             Destroy(cell.gameObject);
         }
+
+        currentCells = new List<BubbleCell>();
     }
 
     [Button]
@@ -73,10 +100,15 @@ public class Bubble : MonoBehaviour
         if (isOpen)
             return;
         isOpen = true;
+        currHolderScale = new Vector2(defaultCellWidth, cellHeight);
+        bubbleFadeHolderTrans.DOKill();
+        bubbleSprite.DOKill();
+        isTransitioning = true;
         bubbleSprite.gameObject.SetActive(true);
         bubbleSprite.DOFade(1, bubbleFadeSpeed).From(0);
         bubbleFadeHolderTrans.DOLocalMoveY(0, bubbleFadeSpeed).SetEase(Ease.OutQuart)
-            .From(bubbleFadeHeight);
+            .From(bubbleFadeHeight)
+            .OnComplete(() => isTransitioning = false);
     }
 
     [Button]
@@ -85,8 +117,11 @@ public class Bubble : MonoBehaviour
         if (!isOpen)
             return;
         isOpen = false;
-        bubbleFadeHolderTrans.DOLocalMoveY(0, bubbleFadeSpeed).SetEase(Ease.OutQuart);
-        DOTween.To(() => bubbleSprite.color.a, SetTransparency, 0, bubbleFadeSpeed)
+        bubbleFadeHolderTrans.DOKill();
+        bubbleSprite.DOKill();
+        isTransitioning = true;
+        bubbleFadeHolderTrans.DOLocalMoveY(bubbleFadeHeight, bubbleFadeSpeed).SetEase(Ease.OutQuart).From(0);
+        DOTween.To(() => bubbleSprite.color.a, (val) => SetTransparency(val), 0, bubbleFadeSpeed)
             .SetEase(Ease.OutQuart)
             .OnComplete(DisableBubble);
     }
@@ -100,21 +135,71 @@ public class Bubble : MonoBehaviour
             c.Transparency = value;
         }
     }
-    
+
+    public void Talk(BubbleCell[] dialogue)
+    {
+        if (isOpen)
+        {
+            FadeOut();
+        }
+        currDialogue = dialogue;
+        currDialogueIndex = 0;
+    }
+
+    void UpdateTalking()
+    {
+        // If there are still things to talk
+        if (currDialogue.Length != 0)
+        {
+            if (!isOpen && !isTransitioning)
+            {
+                FadeIn();
+            }
+            if (isOpen && !isTransitioning)
+            {
+                // If this is fully ready, here is the talking
+                talkTimer -= Time.deltaTime;
+                if (talkTimer <= 0)
+                {
+                    if (currDialogueIndex == 0)
+                    {
+                        FadeOut();
+                        return;
+                    }
+                    // Add another emoji from list
+                    AddCell(currDialogue[currDialogueIndex]);
+                    currDialogueIndex--;
+                }
+            }
+        }
+    }
 
     void Update()
     {
-        Vector2 newHolderScale = RepositionCells();
+        UpdateTalking();
+        if (isOpen)
+        {
+            Vector2 newHolderScale = RepositionCells();
 
-        currHolderScale = Vector3.Lerp(currHolderScale, (Vector3)newHolderScale + Vector3.forward, Time.deltaTime * scaleLerpSpeed);
+            bubbleParentHolderTrans.transform.localPosition =
+                new Vector2((isOnRight ? 1 : -1) * parentScale.x, parentScale.y);
+            
+            currHolderScale = Vector3.Lerp(currHolderScale, (Vector3) newHolderScale + Vector3.forward,
+                Time.deltaTime * scaleLerpSpeed);
 
-        Vector2 newBubbleSize = (currHolderScale + bubbleBottomLeftPadding + bubbleTopRightPadding);
-        
-        // Scale the bubble sprite
-        bubbleSprite.size = newBubbleSize * bubbleScaleMult;
-        
-        // Position the cell holder
-        cellHolderTrans.localPosition = new Vector2(bubbleBottomLeftPadding.x, currHolderScale.y + bubbleBottomLeftPadding.y);
+            Vector2 newBubbleSize = (currHolderScale + bubbleBottomLeftPadding + bubbleTopRightPadding);
+
+            // Scale the bubble sprite
+            bubbleSprite.size = newBubbleSize * bubbleScaleMult;
+
+            bubbleSprite.transform.localScale = new Vector3(isOnRight ? defaultSpriteScale : -defaultSpriteScale,
+                defaultSpriteScale, 1);
+
+            // Position the cell holder
+            cellHolderTrans.localPosition =
+                new Vector2(isOnRight ? bubbleBottomLeftPadding.x : -bubbleBottomLeftPadding.x - currHolderScale.x,
+                    currHolderScale.y + bubbleBottomLeftPadding.y);
+        }
     }
 
     Vector2 RepositionCells()

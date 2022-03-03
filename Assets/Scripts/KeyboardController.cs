@@ -19,8 +19,6 @@ public class KeyboardController : MonoBehaviour
             button.transform.SetParent(textAreaGrid, false);
         else
             button.transform.SetParent(buttonAreaGrid, false);
-        
-        
     }
 
     private void Awake()
@@ -54,7 +52,6 @@ public class KeyboardController : MonoBehaviour
     public void Send()
     {
         FadeOut();
-        if (CameraController.main.currPerson)
-            CameraController.main.currPerson.Talk();
+
     }
 }
