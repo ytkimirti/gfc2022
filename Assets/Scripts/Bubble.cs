@@ -148,7 +148,18 @@ public class Bubble : MonoBehaviour
         while (node != null)
         {
             Talk(node);
-            
+
+            if (node.isMultipleChoice)
+            {
+                MultipleChoiceController.main.ShowOptions(node);
+                while (MultipleChoiceController.main.currSelectedOption == null)
+                    yield return new WaitForEndOfFrame();
+                node = MultipleChoiceController.main.currSelectedOption;
+            }
+
+            while (MultipleChoiceController.main.multipleChoiceBubble.isOpen)
+                yield return new WaitForEndOfFrame();
+            yield return new WaitForSeconds(2f);
             
         }
 
