@@ -24,7 +24,7 @@ public class Bubble : MonoBehaviour
     public float bubbleScaleMult = 1.610441f;
     public Vector2 bubbleBottomLeftPadding;
     public Vector2 bubbleTopRightPadding;
-
+    public Vector2 defaultBubbleSize;
     
     public List<BubbleCell> currentCells;
 
@@ -100,7 +100,7 @@ public class Bubble : MonoBehaviour
         if (isOpen)
             return;
         isOpen = true;
-        currHolderScale = new Vector2(defaultCellWidth, cellHeight);
+        currHolderScale = defaultBubbleSize;
         bubbleFadeHolderTrans.DOKill();
         bubbleSprite.DOKill();
         isTransitioning = true;
@@ -156,7 +156,7 @@ public class Bubble : MonoBehaviour
                     yield return new WaitForEndOfFrame();
                 node = MultipleChoiceController.main.currSelectedOption;
             }
-
+            FadeOut();
             while (MultipleChoiceController.main.multipleChoiceBubble.isOpen)
                 yield return new WaitForEndOfFrame();
             yield return new WaitForSeconds(2f);
@@ -189,7 +189,7 @@ public class Bubble : MonoBehaviour
             {
                 FadeIn();
             }
-            if (isOpen && !isTransitioning)
+            if (isOpen)
             {
                 // If this is fully ready, here is the talking
                 talkTimer -= Time.deltaTime;
@@ -229,7 +229,7 @@ public class Bubble : MonoBehaviour
             Vector2 newBubbleSize = (currHolderScale + bubbleBottomLeftPadding + bubbleTopRightPadding);
 
             // Scale the bubble sprite
-            bubbleSprite.size = newBubbleSize * bubbleScaleMult;
+            bubbleSprite.size = (newBubbleSize * bubbleScaleMult);
 
             bubbleSprite.transform.localScale = new Vector3(isOnRight ? defaultSpriteScale : -defaultSpriteScale,
                 defaultSpriteScale, 1);

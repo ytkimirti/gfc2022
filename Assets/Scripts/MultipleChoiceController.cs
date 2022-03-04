@@ -34,6 +34,7 @@ public class MultipleChoiceController : MonoBehaviour
             go.GetComponent<MultipleChoiceButton>().Init(dialogueData);
         }
     }
+    
 
     public void DestroyOptions()
     {

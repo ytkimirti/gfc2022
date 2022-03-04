@@ -11,7 +11,7 @@ public class BubbleCell : MonoBehaviour
     public Bubble holder;
     public bool isEmoji = true;
     public bool isNewline = false;
-    
+
     public bool isImage = false;
     
     [Range(0f, 3f)]
@@ -31,6 +31,17 @@ public class BubbleCell : MonoBehaviour
         {
             Color c;
             spriteRenderer.color = new Color((c = spriteRenderer.color).r, c.g, c.b, value);
+        }
+    }
+
+    public void GoOverUI()
+    {
+        SpriteRenderer[] renderers = GetComponentsInChildren<SpriteRenderer>();
+
+        foreach (SpriteRenderer r in renderers)
+        {
+            r.sortingLayerName = "UI";
+            r.sortingOrder += 10;
         }
     }
 

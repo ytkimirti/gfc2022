@@ -136,6 +136,7 @@ MonoBehaviour:
   bubbleScaleMult: 1.610441
   bubbleBottomLeftPadding: {x: 0.25, y: 0.18}
   bubbleTopRightPadding: {x: 0.1, y: 0.15}
+  defaultBubbleSize: {x: 0.67, y: 0.7}
   currentCells: []
   scaleLerpSpeed: 5
   horizontalSpacing: 0.02
