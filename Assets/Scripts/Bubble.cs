@@ -1,22 +1,22 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
 using DG.Tweening;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 using NaughtyAttributes;
-using UnityEditor;
-using UnityEngineInternal;
+using UnityEngine.Serialization;
 
 public class Bubble : MonoBehaviour
 {
-    public bool isOpen = false;
-    public bool isTransitioning = false;
+    public bool isOpen;
+    public bool isTransitioning;
     [Space]
     public Vector2 parentScale;
+
+    public bool isAutoRotation;
+    [HideIf("isAutoRotation")]
     public bool isOnRight;
 
     [Space]
@@ -37,12 +37,12 @@ public class Bubble : MonoBehaviour
     public float defaultCellWidth;
     public float maxBubbleWidth;
     private float defaultSpriteScale;
-    private Vector2 defaultSpriteInnerScale;
 
     private Vector2 currHolderScale;
 
+    [FormerlySerializedAs("defaultScreenTime")]
     [Header("Animation Values")]
-    public float defaultScreenTime;
+    public float defaultDisplayTime;
     [Space]
     public float bubbleFadeHeight;
     public float bubbleFadeSpeed;
@@ -61,10 +61,10 @@ public class Bubble : MonoBehaviour
     private void Start()
     {
         defaultSpriteScale = bubbleSprite.transform.localScale.x;
-        defaultSpriteInnerScale = bubbleSprite.size;
+        DisableBubble();
     }
 
-    public void AddCell(GameObject prefab)
+    public void InstantiateCell(GameObject prefab)
     {
         GameObject go = Instantiate(prefab, transform.position, Quaternion.identity, cellHolderTrans);
 
@@ -136,6 +136,29 @@ public class Bubble : MonoBehaviour
         }
     }
 
+    public void Talk(ConvincableDialog dialog)
+    {
+        StartCoroutine(ConvincableDialogEnum(dialog));
+    }
+
+    IEnumerator ConvincableDialogEnum(ConvincableDialog dialog)
+    {
+        DialogueData node = dialog.firstNode;
+
+        while (node != null)
+        {
+            Talk(node);
+            
+            
+        }
+
+        yield return new WaitForSeconds(3);
+    }
+    public void Talk(DialogueData dialoge)
+    {
+        Talk(dialoge.cells.ToArray());
+    }
+    
     public void Talk(BubbleCell[] dialogue)
     {
         if (isOpen)
@@ -161,14 +184,16 @@ public class Bubble : MonoBehaviour
                 talkTimer -= Time.deltaTime;
                 if (talkTimer <= 0)
                 {
-                    if (currDialogueIndex == 0)
+                    if (currDialogueIndex == currDialogue.Length)
                     {
-                        FadeOut();
+                        //FadeOut();
                         return;
                     }
                     // Add another emoji from list
-                    AddCell(currDialogue[currDialogueIndex]);
-                    currDialogueIndex--;
+                    BubbleCell cell = currDialogue[currDialogueIndex];
+                    InstantiateCell(cell.gameObject);
+                    talkTimer = cell.displayTime == 0 ? defaultDisplayTime : cell.displayTime;
+                    currDialogueIndex++;
                 }
             }
         }
@@ -176,6 +201,9 @@ public class Bubble : MonoBehaviour
 
     void Update()
     {
+        if (isAutoRotation)
+            isOnRight = CameraController.main.transform.position.x > transform.position.x;
+        
         UpdateTalking();
         if (isOpen)
         {
@@ -225,7 +253,7 @@ public class Bubble : MonoBehaviour
             
 
             // Make a newline
-            if (nextCell != null && curr.x + nextCell.cellWidth > maxBubbleWidth)
+            if (nextCell != null && ((cell.isNewline) || (curr.x + nextCell.cellWidth > maxBubbleWidth)))
             {
                 curr.x = topLeftCorner.x;
                 curr.y -= cellHeight + verticalSpacing;

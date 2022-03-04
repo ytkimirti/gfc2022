@@ -36,7 +36,7 @@ public class CameraController : MonoBehaviour
         targetPos = (Vector2)currPerson.transform.position + followOffset;
 
         p.Click();
-        KeyboardController.main.FadeIn();
+        // KeyboardController.main.FadeIn();
     }
 
     void LateUpdate()

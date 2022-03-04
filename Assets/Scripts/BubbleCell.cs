@@ -11,6 +11,9 @@ public class BubbleCell : MonoBehaviour
     public Bubble holder;
     public bool isEmoji = true;
     public bool isNewline = false;
+    
+    public bool isImage = false;
+    
     [Range(0f, 3f)]
     public float displayTime = 0; //If left zero, it will be displayed with the default display time
     [HideIf("isEmoji")]
@@ -58,7 +61,7 @@ public class BubbleCell : MonoBehaviour
 
     void Start()
     {
-        if (cellWidth == 0)
+        if (cellWidth == 0 && !isEmoji)
         {
             cellWidth = transform.localScale.x;
         }
@@ -86,7 +89,6 @@ public class BubbleCell : MonoBehaviour
 
     void Update()
     {
-        cellWidth = transform.localScale.x;
-        
+
     }
 }

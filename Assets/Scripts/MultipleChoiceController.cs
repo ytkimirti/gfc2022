@@ -15,6 +15,11 @@ public class MultipleChoiceController : MonoBehaviour
         rect = GetComponent<RectTransform>();
     }
 
+    // public void ShowOptions(Func onPressed, )
+    // {
+    //     
+    // }
+
     [Button()]
     public void FadeIn()
     {
