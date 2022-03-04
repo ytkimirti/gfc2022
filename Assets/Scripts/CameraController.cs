@@ -35,7 +35,7 @@ public class CameraController : MonoBehaviour
         currPerson = p;
         targetPos = (Vector2)currPerson.transform.position + followOffset;
 
-        p.ShutUp();
+        p.Click();
         KeyboardController.main.FadeIn();
     }
 
@@ -44,10 +44,11 @@ public class CameraController : MonoBehaviour
         
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
         
-        Collider2D[] cols = Physics2D.OverlapPointAll(mousePos, playerLayer);
         
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
+            Collider2D[] cols = Physics2D.OverlapPointAll(mousePos, playerLayer);
+            
             if (cols.Length > 0)
             {
                 Person person = cols[0].gameObject.GetComponent<Person>();

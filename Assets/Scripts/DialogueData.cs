@@ -2,11 +2,21 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.Android;
 
 public class DialogueData : MonoBehaviour
 {
     public List<BubbleCell> cells;
+    public bool isConnected;
+    public bool isMultipleChoice;
+
+    [ShowIf("isConnected")]
+    public DialogueData next;
+
+    [ShowIf("isMultipleChoice")]
+    public DialogueData[] choices;
     void Start()
     {
         var childs = GetComponentsInChildren<BubbleCell>().ToList();

@@ -12,27 +12,20 @@ public enum PersonState
 }
 public class Person : MonoBehaviour
 {
-    public bool isMom;
-    public bool isSecondTime;
-    
-    [Header("Talk")]
-    public DialogueData dialogue;
-    public DialogueData dialogue2;
-    
-    public bool dialogueListed;
-    public DialogueData[] dialogueList;
-    public KeyCode keyToSpeak;
-    private int dialogueListIndex = 0;
+    public bool isConvincable = false;
 
-    public EmojiBubble bubble;
-    
+    [ShowIf("isConvincable")]
+    public ConvincableDialog convincableDialog;
+    [Space]
+    public bool isStaticDialogue;
+    public DialogueData staticDialogue;
     
     [Header("State")]
     public bool isJumping;
     public PersonState animationState;
 
     [Header("Shadows")]
-    Color defaultShadowColor;
+    private Color defaultShadowColor;
     private Vector2 defaultShadowScale;
     public float maxHeight;
 
@@ -41,6 +34,7 @@ public class Person : MonoBehaviour
     
     [Header("References")]
     public Transform spriteHolder;
+    public EmojiBubble bubble;
 
     public Animator spriteAnimator;
     public SpriteRenderer sprite;
@@ -58,23 +52,26 @@ public class Person : MonoBehaviour
         isJumping = false;
     }
 
+    public void Click()
+    {
+        ClickEffect();
+        if (isConvincable)
+        {
+            
+        }
+    }
+
     public void ClickEffect()
     {
         spriteAnimator.transform.DOPunchScale(Vector3.one * clickScaleAmount, 0.2f);
     }
     void Update()
     {
-        if (Input.GetKeyDown(keyToSpeak))
-        {
-
-        }
-        
         float shadowPercent = Mathf.Clamp(spriteHolder.transform.localPosition.y / maxHeight, 0, 1); 
         shadowSprite.color = Color.Lerp(defaultShadowColor, new Color(0, 0, 0, 0), shadowPercent);
         shadowSprite.transform.localScale = defaultShadowScale * (1 - shadowPercent);
         
         // Animation
-
         if (isJumping)
             animationState = PersonState.Jumping;
         else
