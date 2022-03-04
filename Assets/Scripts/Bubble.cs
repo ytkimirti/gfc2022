@@ -118,7 +118,6 @@ public class Bubble : MonoBehaviour
         if (!isOpen)
             return;
         isOpen = false;
-        currDialogue = null;
         bubbleFadeHolderTrans.DOKill();
         bubbleSprite.DOKill();
         isClosingTransition = true;
@@ -163,8 +162,10 @@ public class Bubble : MonoBehaviour
             while (MultipleChoiceController.main.multipleChoiceBubble.isOpen)
                 yield return new WaitForEndOfFrame();
             
-            yield return new WaitForSeconds(2f);
             FadeOut();
+
+            while (isClosingTransition)
+                yield return new WaitForEndOfFrame();
         }
 
         yield return new WaitForSeconds(3);
