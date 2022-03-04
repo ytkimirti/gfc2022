@@ -5902,6 +5902,10 @@ PrefabInstance:
       propertyPath: isAutoRotation
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3669106379881919409, guid: 6855b0f83aa232742b740c6b382abcd3, type: 3}
+      propertyPath: closeAfterFinishing
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6855b0f83aa232742b740c6b382abcd3, type: 3}
 --- !u!4 &1347757084 stripped

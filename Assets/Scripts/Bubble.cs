@@ -10,8 +10,10 @@ using UnityEngine.Serialization;
 
 public class Bubble : MonoBehaviour
 {
+    public bool isFinished = false;
     public bool isOpen;
-    public bool isTransitioning;
+    public bool isClosingTransition;
+    public bool closeAfterFinishing;
     [Space]
     public Vector2 parentScale;
 
@@ -84,7 +86,7 @@ public class Bubble : MonoBehaviour
 
     public void DisableBubble()
     {
-        isTransitioning = false;
+        isClosingTransition = false;
         bubbleSprite.gameObject.SetActive(false);
         foreach (BubbleCell cell in currentCells)
         {
@@ -103,12 +105,11 @@ public class Bubble : MonoBehaviour
         currHolderScale = defaultBubbleSize;
         bubbleFadeHolderTrans.DOKill();
         bubbleSprite.DOKill();
-        isTransitioning = true;
         bubbleSprite.gameObject.SetActive(true);
         bubbleSprite.DOFade(1, bubbleFadeSpeed).From(0);
         bubbleFadeHolderTrans.DOLocalMoveY(0, bubbleFadeSpeed).SetEase(Ease.OutQuart)
             .From(bubbleFadeHeight)
-            .OnComplete(() => isTransitioning = false);
+            .OnComplete(() => isClosingTransition = false);
     }
 
     [Button]
@@ -117,9 +118,10 @@ public class Bubble : MonoBehaviour
         if (!isOpen)
             return;
         isOpen = false;
+        currDialogue = null;
         bubbleFadeHolderTrans.DOKill();
         bubbleSprite.DOKill();
-        isTransitioning = true;
+        isClosingTransition = true;
         bubbleFadeHolderTrans.DOLocalMoveY(bubbleFadeHeight, bubbleFadeSpeed).SetEase(Ease.OutQuart).From(0);
         DOTween.To(() => bubbleSprite.color.a, (val) => SetTransparency(val), 0, bubbleFadeSpeed)
             .SetEase(Ease.OutQuart)
@@ -155,12 +157,14 @@ public class Bubble : MonoBehaviour
                 while (MultipleChoiceController.main.currSelectedOption == null)
                     yield return new WaitForEndOfFrame();
                 node = MultipleChoiceController.main.currSelectedOption;
+                MultipleChoiceController.main.currSelectedOption = null;
             }
-            FadeOut();
+
             while (MultipleChoiceController.main.multipleChoiceBubble.isOpen)
                 yield return new WaitForEndOfFrame();
-            yield return new WaitForSeconds(2f);
             
+            yield return new WaitForSeconds(2f);
+            FadeOut();
         }
 
         yield return new WaitForSeconds(3);
@@ -182,10 +186,11 @@ public class Bubble : MonoBehaviour
 
     void UpdateTalking()
     {
+        isFinished = false;
         // If there are still things to talk
         if (currDialogue.Length != 0)
         {
-            if (!isOpen && !isTransitioning)
+            if (!isOpen && !isClosingTransition)
             {
                 FadeIn();
             }
@@ -197,7 +202,12 @@ public class Bubble : MonoBehaviour
                 {
                     if (currDialogueIndex == currDialogue.Length)
                     {
-                        //FadeOut();
+                        if (closeAfterFinishing)
+                        {
+                            FadeOut();
+                        }
+
+                        isFinished = true;
                         return;
                     }
                     // Add another emoji from list
@@ -205,6 +215,8 @@ public class Bubble : MonoBehaviour
                     InstantiateCell(cell.gameObject);
                     talkTimer = cell.displayTime == 0 ? defaultDisplayTime : cell.displayTime;
                     currDialogueIndex++;
+                    if (closeAfterFinishing && currDialogueIndex == currDialogue.Length)
+                        talkTimer += 2f;
                 }
             }
         }
