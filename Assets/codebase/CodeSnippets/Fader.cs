@@ -38,12 +38,12 @@ public class Fader : MonoBehaviour
 		faderRight.gameObject.SetActive(true);
 		faderRight.DOKill();
 		faderRight.localScale = new Vector3(0, 1, 1);
-		faderRight.DOScale(Vector3.one, fadeSpeed).SetUpdate(true);
+		faderRight.DOScale(new Vector3(0.5f, 1, 1), fadeSpeed).SetUpdate(true);
 
 		faderLeft.gameObject.SetActive(true);
 		faderLeft.DOKill();
 		faderLeft.localScale = new Vector3(0, 1, 1);
-		faderLeft.DOScale(Vector3.one, fadeSpeed).SetUpdate(true);
+		faderLeft.DOScale(new Vector3(0.5f, 1, 1), fadeSpeed).SetUpdate(true);
 	}
 
 
@@ -52,12 +52,12 @@ public class Fader : MonoBehaviour
 	{
 		faderRight.gameObject.SetActive(true);
 		faderRight.DOKill();
-		faderRight.localScale = new Vector3(1, 1, 1);
+		faderRight.localScale = new Vector3(0.5f, 1, 1);
 		faderRight.DOScale(new Vector3(0, 1, 1), fadeSpeed).SetUpdate(true);
 
 		faderLeft.gameObject.SetActive(true);
 		faderLeft.DOKill();
-		faderLeft.localScale = new Vector3(1, 1, 1);
+		faderLeft.localScale = new Vector3(0.5f, 1, 1);
 		faderLeft.DOScale(new Vector3(0, 1, 1), fadeSpeed).SetUpdate(true);
 	}
 
