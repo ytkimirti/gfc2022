@@ -16,6 +16,10 @@ public enum PersonState
 }
 public class Person : MonoBehaviour
 {
+    public bool isTalkable;
+
+    [ShowIf("isTalkable")]
+    public PersonDialog personDialog;
     public bool isConvincable = false;
 
     [ShowIf("isConvincable")]
@@ -86,7 +90,15 @@ public class Person : MonoBehaviour
     public void Click()
     {
         ClickEffect();
-        if (isStaticDialogue)
+        if (isTalkable)
+        {
+            KeyboardController.main.currDialog = personDialog;
+            KeyboardController.main.currTalkingBubble = bubble;
+            KeyboardController.main.FadeIn();
+            if (personDialog.helloDialogue)
+                bubble.Talk(personDialog.helloDialogue);
+        }
+        else if (isStaticDialogue)
         {
             bubble.Talk(staticDialogue);
         }
@@ -104,6 +116,7 @@ public class Person : MonoBehaviour
     {
         isFocused = CameraController.main.currPerson == this;
 
+        //TODO: Add if it's not focused and bubble is open, close that bubble 
         
         // Animation
         if (isRunning)

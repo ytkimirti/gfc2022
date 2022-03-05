@@ -270,3 +270,4 @@ MonoBehaviour:
   lerpSpeed: 7
   actualButton: {fileID: 3550067684974452543}
   myRect: {fileID: 8441237110368954193}
+  image: {fileID: 1958885946116410452}

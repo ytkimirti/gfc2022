@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EmojiButton : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class EmojiButton : MonoBehaviour
     public float lerpSpeed;
     public RectTransform actualButton;
     public RectTransform myRect;
+    public Image image;
     void Start()
     {
         

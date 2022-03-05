@@ -251,7 +251,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7825887130826404101}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.08, z: 0}
+  m_LocalPosition: {x: 0, y: -0.224, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7825887131428677509}
@@ -297,12 +297,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ae1106d12305bfb458a48bba26a61961, type: 3}
+  m_Sprite: {fileID: -3069592894604983486, guid: cde80052fcd9b1b4b982df3d826af8da, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.72, y: 0.72}
+  m_Size: {x: 0.8, y: 0.88}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -356,9 +356,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9bebb960dd977449f5453dabf235cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTalkable: 1
+  personDialog: {fileID: 0}
   isConvincable: 0
   convincableDialog: {fileID: 0}
-  isStaticDialogue: 1
+  isStaticDialogue: 0
   staticDialogue: {fileID: 0}
   isFocused: 0
   isJumping: 1
@@ -391,9 +393,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.24}
+  m_Offset: {x: 0, y: 0.09}
   serializedVersion: 2
-  m_Radius: 0.72
+  m_Radius: 0.41
 --- !u!1 &7825887131410516405
 GameObject:
   m_ObjectHideFlags: 0
@@ -583,8 +585,24 @@ PrefabInstance:
       value: Bubble
       objectReference: {fileID: 0}
     - target: {fileID: 3669106379881919409, guid: 6855b0f83aa232742b740c6b382abcd3, type: 3}
+      propertyPath: parentScale.x
+      value: 0.279
+      objectReference: {fileID: 0}
+    - target: {fileID: 3669106379881919409, guid: 6855b0f83aa232742b740c6b382abcd3, type: 3}
+      propertyPath: parentScale.y
+      value: 0.279
+      objectReference: {fileID: 0}
+    - target: {fileID: 3669106379881919409, guid: 6855b0f83aa232742b740c6b382abcd3, type: 3}
       propertyPath: isAutoRotation
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5345742295808624892, guid: 6855b0f83aa232742b740c6b382abcd3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.279
+      objectReference: {fileID: 0}
+    - target: {fileID: 5345742295808624892, guid: 6855b0f83aa232742b740c6b382abcd3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.293
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6855b0f83aa232742b740c6b382abcd3, type: 3}

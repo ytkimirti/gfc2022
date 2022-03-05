@@ -4,49 +4,49 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: -8624332010927761205
-    second: lady3_0
+    second: aaaperson
   - first:
       213: 6075797571524988510
-    second: lady3_1
+    second: aaaperson1
   - first:
       213: 5614731751187418270
-    second: lady3_2
+    second: aaaperson2
   - first:
       213: -417114618465482243
-    second: lady3_3
+    second: aaaperson3
   - first:
       213: 5375374249971611564
-    second: lady3_4
+    second: aaaperson4
   - first:
       213: -1082749615829578725
-    second: lady3_5
+    second: aaaperson6
   - first:
       213: -3069592894604983486
-    second: lady3_6
+    second: aaaperson7
   - first:
       213: -5832237031141374344
-    second: lady3_7
+    second: aaaperson8
   - first:
       213: -5955643863054821335
-    second: lady3_8
+    second: aaaperson9
   - first:
       213: -5139393037112203204
-    second: lady3_9
+    second: aaaperson10
   - first:
       213: -838523412296011157
-    second: lady3_10
+    second: aaaperson11
   - first:
       213: 8997979319838501698
-    second: lady3_11
+    second: aaaperson12
   - first:
       213: -4502693112724451646
-    second: lady3_12
+    second: aaaperson13
   - first:
       213: 65320102659414298
-    second: lady3_13
+    second: aaaperson15
   - first:
       213: -741865665128468799
-    second: lady3_14
+    second: aaaperson14
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -148,15 +148,15 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: lady3_0
+      name: aaaperson
       rect:
         serializedVersion: 2
         x: 44
         y: 395
         width: 89
         height: 75
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.73910797, y: 0.058225505}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -169,15 +169,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lady3_1
+      name: aaaperson1
       rect:
         serializedVersion: 2
         x: 176
-        y: 395
+        y: 396
         width: 58
         height: 69
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.4516236, y: 0.0683324}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -190,15 +190,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lady3_2
+      name: aaaperson2
       rect:
         serializedVersion: 2
         x: 270
         y: 370
         width: 72
         height: 96
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5029975, y: 0.19423516}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -211,15 +211,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lady3_3
+      name: aaaperson3
       rect:
         serializedVersion: 2
         x: 375
         y: 408
         width: 83
         height: 73
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.62221956, y: 0.12155151}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -232,15 +232,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lady3_4
+      name: aaaperson4
       rect:
         serializedVersion: 2
         x: 20
         y: 227
         width: 55
         height: 94
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.49286526, y: 0.30379227}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -253,15 +253,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lady3_5
+      name: aaaperson6
       rect:
         serializedVersion: 2
         x: 118
         y: 251
         width: 54
         height: 87
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.51412964, y: 0.032997396}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -274,15 +274,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lady3_6
+      name: aaaperson7
       rect:
         serializedVersion: 2
         x: 184
         y: 234
         width: 80
         height: 88
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.6120655, y: 0.18136597}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -295,15 +295,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lady3_7
+      name: aaaperson8
       rect:
         serializedVersion: 2
         x: 297
         y: 235
         width: 63
         height: 88
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5060561, y: 0.17919749}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -316,15 +316,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lady3_8
+      name: aaaperson9
       rect:
         serializedVersion: 2
         x: 426
         y: 231
         width: 52
         height: 82
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5130316, y: 0.20524858}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -337,15 +337,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lady3_9
+      name: aaaperson10
       rect:
         serializedVersion: 2
         x: 23
         y: 127
         width: 80
         height: 80
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.32776326, y: 0.17529126}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -358,15 +358,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lady3_10
+      name: aaaperson11
       rect:
         serializedVersion: 2
-        x: 144
+        x: 143
         y: 136
         width: 70
         height: 77
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.49031916, y: 0.03649724}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -379,15 +379,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lady3_11
+      name: aaaperson12
       rect:
         serializedVersion: 2
         x: 247
         y: 131
         width: 75
         height: 86
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.4879529, y: 0.10076266}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -400,15 +400,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lady3_12
+      name: aaaperson13
       rect:
         serializedVersion: 2
         x: 341
         y: 137
         width: 76
         height: 79
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.36328086, y: 0.039653536}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -421,15 +421,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lady3_13
+      name: aaaperson15
       rect:
         serializedVersion: 2
         x: 429
         y: 141
         width: 58
         height: 73
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.535051, y: 0.06679734}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -442,15 +442,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lady3_14
+      name: aaaperson14
       rect:
         serializedVersion: 2
         x: 33
         y: 35
         width: 54
         height: 74
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.49407336, y: 0.050208222}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

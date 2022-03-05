@@ -19,6 +19,10 @@ public class CameraController : MonoBehaviour
     public static CameraController main;
 
     public LayerMask playerLayer;
+    private float focusTimer;
+    private Vector2 focusedPosition;
+
+    private Vector2 memMousePos;
 
     private void Awake()
     {
@@ -30,20 +34,31 @@ public class CameraController : MonoBehaviour
         
     }
 
+
     public void FocusOnPerson(Person p)
     {
         currPerson = p;
         targetPos = (Vector2)currPerson.transform.position + followOffset;
+        focusedPosition = targetPos;
 
         p.Click();
+        focusTimer = 2;
         // KeyboardController.main.FadeIn();
     }
 
     void LateUpdate()
     {
-        
+        if (currPerson && Vector2.Distance(targetPos, focusedPosition) > 1f)
+        {
+            focusTimer -= Time.deltaTime;
+            if (focusTimer <= 0)
+            {
+                currPerson = null;
+            }
+        }
+
+        bool isMouse = Input.GetKey(KeyCode.Mouse0);
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-        
         
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
@@ -57,7 +72,11 @@ public class CameraController : MonoBehaviour
         }
 
         targetPos += new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * Time.deltaTime * 4;
-        
+        if (isMouse)
+            targetPos += memMousePos - mousePos;
+
+        memMousePos = mousePos;
+
         transform.position = Vector2.Lerp(transform.position, targetPos, lerpSpeed * Time.deltaTime);
     }
 }

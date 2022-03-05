@@ -1,28 +1,34 @@
 fileFormatVersion: 2
-guid: bea3c25305d0a8b4491d2d97cc82514b
+guid: 1f19cfb896e856a489712e85159c88cf
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2532171668319943441
-    second: baby1_0
+      213: 414619943114611770
+    second: aaababy
   - first:
-      213: -6634402718827346017
-    second: baby1_1
+      213: 9030127337846564923
+    second: aaababy1
   - first:
-      213: 8572654638784244769
-    second: baby1_2
+      213: -3224255260478290325
+    second: aaababy2
   - first:
-      213: -3651420117778741708
-    second: baby1_3
+      213: 6974191386376044740
+    second: aaababy3
   - first:
-      213: -6395967215335732751
-    second: baby1_4
+      213: 177051311712493492
+    second: aaababy4
   - first:
-      213: 5271806477548215431
-    second: baby1_5
+      213: 6727919983237808277
+    second: aaababy5
   - first:
-      213: -1212605769939188668
-    second: baby1_6
+      213: -2407339632928918329
+    second: aaababy6
+  - first:
+      213: -8715743273116350879
+    second: aaababy7
+  - first:
+      213: -3955733597945894962
+    second: aaababy8
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -108,152 +114,206 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: baby1_0
+      name: aaababy
       rect:
         serializedVersion: 2
         x: 49
-        y: 379
+        y: 354
         width: 89
-        height: 72
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 97
+      alignment: 9
+      pivot: {x: 0.5916982, y: 0.06762286}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fe44b7f984bebdcd0800000000000000
-      internalID: -2532171668319943441
+      spriteID: a3c932a34a601c500800000000000000
+      internalID: 414619943114611770
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: baby1_1
+      name: aaababy1
       rect:
         serializedVersion: 2
         x: 170
-        y: 322
-        width: 72
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        y: 347
+        width: 94
+        height: 103
+      alignment: 9
+      pivot: {x: 0.37996805, y: 0.13900313}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f970967b0eddde3a0800000000000000
-      internalID: -6634402718827346017
+      spriteID: b3863e858f4715d70800000000000000
+      internalID: 9030127337846564923
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: baby1_2
+      name: aaababy2
       rect:
         serializedVersion: 2
         x: 268
-        y: 320
+        y: 351
         width: 72
-        height: 131
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 100
+      alignment: 9
+      pivot: {x: 0.5048434, y: 0.10248871}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 12ce6de59ff28f670800000000000000
-      internalID: 8572654638784244769
+      spriteID: b66c1066ce42143d0800000000000000
+      internalID: -3224255260478290325
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: baby1_3
+      name: aaababy3
       rect:
         serializedVersion: 2
-        x: 343
-        y: 332
-        width: 112
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 364
+        y: 351
+        width: 72
+        height: 109
+      alignment: 9
+      pivot: {x: 0.5048434, y: 0.106519505}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 436451abfbc835dc0800000000000000
-      internalID: -3651420117778741708
+      spriteID: 4c088847d1e49c060800000000000000
+      internalID: 6974191386376044740
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: baby1_4
+      name: aaababy4
       rect:
         serializedVersion: 2
-        x: 43
-        y: 75
-        width: 102
-        height: 145
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 117
+        y: 254
+        width: 80
+        height: 97
+      alignment: 9
+      pivot: {x: 0.45122796, y: 0.12457055}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1f98ed674b5fc37a0800000000000000
-      internalID: -6395967215335732751
+      spriteID: 4bfd3adda33057200800000000000000
+      internalID: 177051311712493492
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: baby1_5
+      name: aaababy5
       rect:
         serializedVersion: 2
-        x: 187
-        y: 78
-        width: 102
-        height: 151
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 30
+        y: 130
+        width: 110
+        height: 90
+      alignment: 9
+      pivot: {x: 0.5709418, y: 0.07369385}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 78c5dd26f08392940800000000000000
-      internalID: 5271806477548215431
+      spriteID: 5904426249f5e5d50800000000000000
+      internalID: 6727919983237808277
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: baby1_6
+      name: aaababy6
       rect:
         serializedVersion: 2
-        x: 348
-        y: 73
-        width: 84
-        height: 149
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 190
+        y: 130
+        width: 83
+        height: 100
+      alignment: 9
+      pivot: {x: 0.57834965, y: 0.04804306}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4448f261a75fb2fe0800000000000000
-      internalID: -1212605769939188668
+      spriteID: 7c47d85cb59679ed0800000000000000
+      internalID: -2407339632928918329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aaababy7
+      rect:
+        serializedVersion: 2
+        x: 354
+        y: 111
+        width: 104
+        height: 111
+      alignment: 9
+      pivot: {x: 0.32804665, y: 0.16313405}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 166466ccba57b0780800000000000000
+      internalID: -8715743273116350879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aaababy8
+      rect:
+        serializedVersion: 2
+        x: 262
+        y: 29
+        width: 76
+        height: 100
+      alignment: 9
+      pivot: {x: 0.5042789, y: 0.106569745}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec76b5440496a19c0800000000000000
+      internalID: -3955733597945894962
       vertices: []
       indices: 
       edges: []
