@@ -90,12 +90,15 @@ public class Person : MonoBehaviour
     public void Click()
     {
         ClickEffect();
+        if (bubble.isOpen)
+            bubble.FadeOut();
+        
         if (isTalkable)
         {
             KeyboardController.main.currDialog = personDialog;
             KeyboardController.main.currTalkingBubble = bubble;
             KeyboardController.main.FadeIn();
-            if (personDialog.helloDialogue)
+            if (personDialog.helloDialogue != null)
                 bubble.Talk(personDialog.helloDialogue);
         }
         else if (isStaticDialogue)
@@ -116,7 +119,10 @@ public class Person : MonoBehaviour
     {
         isFocused = CameraController.main.currPerson == this;
 
-        //TODO: Add if it's not focused and bubble is open, close that bubble 
+        if (!isFocused && bubble.isFinished)
+        {
+            bubble.FadeOut();
+        }
         
         // Animation
         if (isRunning)

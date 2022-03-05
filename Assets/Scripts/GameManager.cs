@@ -1,11 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
+    public bool godmode;
     [Header("Special Emojis")]
     public Sprite waitEmoji;
     public Sprite newlineEmoji;
@@ -39,5 +41,11 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+    }
+
+    private void Update()
+    {
+        
+        Time.timeScale = godmode ? (Input.GetKey(KeyCode.F) ? 5 : 1) : 1;
     }
 }

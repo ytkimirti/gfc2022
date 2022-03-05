@@ -15,6 +15,11 @@ public class KeyboardController : MonoBehaviour
     public Transform textAreaGrid;
     public Transform buttonAreaGrid;
 
+    [Header("References")]
+    public GameObject buttonPrefab;
+
+    public List<Sprite> addedButtons;
+
     public static KeyboardController main;
 
     public void OnButtonPressed(EmojiButton button)
@@ -23,6 +28,19 @@ public class KeyboardController : MonoBehaviour
             button.transform.SetParent(textAreaGrid, false);
         else
             button.transform.SetParent(buttonAreaGrid, false);
+    }
+
+    public void AddNewButton(Sprite sprite)
+    {
+        if (addedButtons.Contains(sprite))
+            return;
+        addedButtons.Add(sprite);
+        NewEffect.main.Open(sprite);
+        
+        GameObject go = Instantiate(buttonPrefab, buttonAreaGrid.position, Quaternion.identity, buttonAreaGrid);
+        EmojiButton button = go.GetComponent<EmojiButton>();
+
+        button.image.sprite = sprite;
     }
 
     private void Awake()
@@ -79,10 +97,14 @@ public class KeyboardController : MonoBehaviour
             
             if (sprites.Length == 0)
                 Debug.LogError("Length can't be zero");
+
+            if (sprites.Length != selectedSprites.Length)
+                continue;
             
             print($"Currently examined things {sprites.Length}");
 
             doesMatch = true;
+            
             foreach (Sprite s in sprites)
             {
                 if (!(selectedSprites.Contains(s)))

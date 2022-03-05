@@ -17,6 +17,11 @@ public class DialogueData : MonoBehaviour
 
     [ShowIf("isMultipleChoice")]
     public DialogueData[] choices;
+
+    public bool isUnlockable;
+
+    [ShowIf("isUnlockable")]
+    public Sprite unlockedEmoji;
     void Start()
     {
         var childs = GetComponentsInChildren<BubbleCell>().ToList();
@@ -38,6 +43,14 @@ public class DialogueData : MonoBehaviour
     {
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(transform.position, 0.2f);
+
+        Gizmos.color = Color.yellow;
+
+        if (!isUnlockable)
+            return;
+        Gizmos.DrawWireSphere(transform.position, 0.3f);
+        Gizmos.DrawWireSphere(transform.position, 0.4f);
+
     }
 
     void Update()

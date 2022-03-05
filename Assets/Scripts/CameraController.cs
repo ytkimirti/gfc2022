@@ -48,6 +48,9 @@ public class CameraController : MonoBehaviour
 
     void LateUpdate()
     {
+        if (NewEffect.main.isOpen)
+            return;
+        
         if (currPerson && Vector2.Distance(targetPos, focusedPosition) > 1f &&
             !KeyboardController.main.isOpen)
         {

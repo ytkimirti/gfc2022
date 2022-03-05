@@ -12,7 +12,7 @@ public class EmojiButton : MonoBehaviour
     public Image image;
     void Start()
     {
-        
+        currPos = transform.position;
     }
 
     public void OnClick()

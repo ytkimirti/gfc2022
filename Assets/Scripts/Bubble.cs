@@ -60,6 +60,8 @@ public class Bubble : MonoBehaviour
     public Transform cellHolderTrans;
     public Transform bubbleFadeHolderTrans;
 
+    private Sprite waitForUnlock;
+
     private void Start()
     {
         defaultSpriteScale = bubbleSprite.transform.localScale.x;
@@ -117,6 +119,8 @@ public class Bubble : MonoBehaviour
     {
         if (!isOpen)
             return;
+        currDialogue = new BubbleCell[0];
+        currDialogueIndex = 0;
         isOpen = false;
         bubbleFadeHolderTrans.DOKill();
         bubbleSprite.DOKill();
@@ -172,6 +176,10 @@ public class Bubble : MonoBehaviour
     }
     public void Talk(DialogueData dialoge)
     {
+        if (dialoge.isUnlockable)
+        {
+            waitForUnlock = dialoge.unlockedEmoji;
+        }
         Talk(dialoge.cells.ToArray());
     }
     
@@ -207,7 +215,7 @@ public class Bubble : MonoBehaviour
                         {
                             FadeOut();
                         }
-
+                        KeyboardController.main.AddNewButton(waitForUnlock);
                         isFinished = true;
                         return;
                     }
