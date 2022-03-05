@@ -42,13 +42,14 @@ public class CameraController : MonoBehaviour
         focusedPosition = targetPos;
 
         p.Click();
-        focusTimer = 2;
+        focusTimer = 0.2f;
         // KeyboardController.main.FadeIn();
     }
 
     void LateUpdate()
     {
-        if (currPerson && Vector2.Distance(targetPos, focusedPosition) > 1f)
+        if (currPerson && Vector2.Distance(targetPos, focusedPosition) > 1f &&
+            !KeyboardController.main.isOpen)
         {
             focusTimer -= Time.deltaTime;
             if (focusTimer <= 0)

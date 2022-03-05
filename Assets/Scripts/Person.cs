@@ -127,6 +127,9 @@ public class Person : MonoBehaviour
             animationState = PersonState.Jumping;
         else
             animationState = PersonState.Idle;
+
+        if (isFocused)
+            animationState = PersonState.Idle;
         
         // Running
         if (!isFocused && (isRunning || isWalking))

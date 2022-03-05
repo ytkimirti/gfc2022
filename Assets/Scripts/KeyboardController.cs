@@ -8,6 +8,7 @@ using NaughtyAttributes;
 
 public class KeyboardController : MonoBehaviour
 {
+    public bool isOpen;
     public PersonDialog currDialog;
     public Bubble currTalkingBubble;
     public RectTransform rect;
@@ -32,6 +33,7 @@ public class KeyboardController : MonoBehaviour
     [Button()]
     public void FadeIn()
     {
+        isOpen = true;
         rect.DOAnchorPosY(0, 0.6f).SetEase(Ease.OutQuart);
         ClearTextArea();
     }
@@ -39,6 +41,7 @@ public class KeyboardController : MonoBehaviour
     [Button()]
     public void FadeOut()
     {
+        isOpen = false;
         currDialog = null;
         rect.DOAnchorPosY(-rect.sizeDelta.y * 2, 0.6f).SetEase(Ease.OutQuart);
     }
