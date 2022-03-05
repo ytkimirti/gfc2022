@@ -251,7 +251,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7825887130826404101}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.224, z: 0}
+  m_LocalPosition: {x: 0, y: -0.013, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7825887131428677509}
@@ -297,7 +297,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -3069592894604983486, guid: cde80052fcd9b1b4b982df3d826af8da, type: 3}
+  m_Sprite: {fileID: -5955643863054821335, guid: cde80052fcd9b1b4b982df3d826af8da, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -357,18 +357,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isTalkable: 1
+  findNewPosAfterReach: 0
+  isSpeaker: 0
   personDialog: {fileID: 0}
   isConvincable: 0
   convincableDialog: {fileID: 0}
   isStaticDialogue: 0
   staticDialogue: {fileID: 0}
   isFocused: 0
-  isJumping: 1
+  isJumping: 0
   isWalking: 0
   isRunning: 0
   animationState: 0
   runningSpeed: 2
-  walkingSpeed: 0.5
+  walkingSpeed: 0.3
   runningSpeedRandomness: 0.4
   waitTime: 2
   waitTimeRandomness: 1

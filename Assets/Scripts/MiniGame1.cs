@@ -18,17 +18,11 @@ public class MiniGame1 : MonoBehaviour
 
 
     public bool timerIsRunning = false;
-    /*private void Awake()
-    {
-        Time.timeScale = 0;
-        StartCoroutine(Coroutine());
-    }*/
+
     private void Start()
 
     {
-        
-        // Starts the timer automatically
-        //Time.timeScale = 1;
+        StartCoroutine(TimerEnum());
         playgame.SetActive(true);
         time321.SetActive(false);
         timerIsRunning = true;
@@ -70,12 +64,11 @@ public class MiniGame1 : MonoBehaviour
         scoreTxt.text = score.ToString();
     }
 
-    /*IEnumerator Coroutine()
+    IEnumerator TimerEnum()
     {
-        
         time321Txt.text = Time.time.ToString();
         yield return new WaitForSeconds(3f);
         Debug.Log(Time.time);
         Time.timeScale = 1;
-    }*/
+    }
 }

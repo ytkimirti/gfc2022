@@ -7,6 +7,7 @@ using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 using NaughtyAttributes;
 using UnityEngine.Serialization;
+using UnityEngineInternal;
 
 public class Bubble : MonoBehaviour
 {
@@ -14,8 +15,11 @@ public class Bubble : MonoBehaviour
     public bool isOpen;
     public bool isClosingTransition;
     public bool closeAfterFinishing;
+    private bool isFastDialogue; // Go over it fast
     [Space]
     public Vector2 parentScale;
+
+    public bool isEnd;
 
     public bool isAutoRotation;
     [HideIf("isAutoRotation")]
@@ -66,6 +70,12 @@ public class Bubble : MonoBehaviour
     {
         defaultSpriteScale = bubbleSprite.transform.localScale.x;
         DisableBubble();
+    }
+
+    public void MakeFinalTalk(DialogueData data)
+    {
+        isEnd = true;
+        Talk(data);
     }
 
     public void InstantiateCell(GameObject prefab)
@@ -119,6 +129,7 @@ public class Bubble : MonoBehaviour
     {
         if (!isOpen)
             return;
+        isFastDialogue = false;
         currDialogue = new BubbleCell[0];
         currDialogueIndex = 0;
         isOpen = false;
@@ -176,8 +187,22 @@ public class Bubble : MonoBehaviour
     }
     public void Talk(DialogueData dialoge)
     {
+        // if (dialoge.secondTimeShowFast)
+        // {
+        //     if (PlayerPrefs.HasKey(dialoge.name))
+        //     {
+        //         isFastDialogue = true;
+        //     }
+        //     else
+        //     {
+        //         PlayerPrefs.SetInt(dialoge.name,1);
+        //     }    
+        // }
+        //
+        print($"Talking dialog {dialoge.gameObject.name}");
         if (dialoge.isUnlockable)
         {
+            print("It has an unlockable");
             waitForUnlock = dialoge.unlockedEmoji;
         }
         Talk(dialoge.cells.ToArray());
@@ -215,7 +240,13 @@ public class Bubble : MonoBehaviour
                         {
                             FadeOut();
                         }
-                        KeyboardController.main.AddNewButton(waitForUnlock);
+                        if (waitForUnlock != null)
+                            KeyboardController.main.AddNewButton(waitForUnlock);
+                        if (isEnd)
+                        {
+                            isEnd = false;
+                            GameManager.main.SurpriseEveryone();
+                        }
                         isFinished = true;
                         return;
                     }
@@ -223,6 +254,8 @@ public class Bubble : MonoBehaviour
                     BubbleCell cell = currDialogue[currDialogueIndex];
                     InstantiateCell(cell.gameObject);
                     talkTimer = cell.displayTime == 0 ? defaultDisplayTime : cell.displayTime;
+                    if (isFastDialogue)
+                        talkTimer = defaultDisplayTime * 0.6f;
                     currDialogueIndex++;
                     if (closeAfterFinishing && currDialogueIndex == currDialogue.Length)
                         talkTimer += 2f;

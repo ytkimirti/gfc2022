@@ -37,8 +37,13 @@ public class CameraController : MonoBehaviour
 
     public void FocusOnPerson(Person p)
     {
+        if (!p.isTalkable && !p.isStaticDialogue)
+            return;
         currPerson = p;
         targetPos = (Vector2)currPerson.transform.position + followOffset;
+
+        if (currPerson.isSpeaker)
+            targetPos = currPerson.transform.position;
         focusedPosition = targetPos;
 
         p.Click();
@@ -48,8 +53,6 @@ public class CameraController : MonoBehaviour
 
     void LateUpdate()
     {
-        if (NewEffect.main.isOpen)
-            return;
         
         if (currPerson && Vector2.Distance(targetPos, focusedPosition) > 1f &&
             !KeyboardController.main.isOpen)
@@ -66,6 +69,7 @@ public class CameraController : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
+            memMousePos = mousePos;
             Collider2D[] cols = Physics2D.OverlapPointAll(mousePos, playerLayer);
             
             if (cols.Length > 0)

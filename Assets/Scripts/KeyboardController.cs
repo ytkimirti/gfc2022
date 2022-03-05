@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 using DG.Tweening;
 using NaughtyAttributes;
+using UnityEngine.UI;
 
 public class KeyboardController : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class KeyboardController : MonoBehaviour
     public Bubble currTalkingBubble;
     public RectTransform rect;
     public Transform textAreaGrid;
+    public Animator textAreaAnimator;
     public Transform buttonAreaGrid;
 
     [Header("References")]
@@ -25,9 +27,10 @@ public class KeyboardController : MonoBehaviour
     public void OnButtonPressed(EmojiButton button)
     {
         if (button.transform.parent == buttonAreaGrid)
-            button.transform.SetParent(textAreaGrid, false);
+            button.transform.SetParent(textAreaGrid, true);
         else
-            button.transform.SetParent(buttonAreaGrid, false);
+            button.transform.SetParent(buttonAreaGrid, true);
+        button.currPos = button.transform.position;
     }
 
     public void AddNewButton(Sprite sprite)
@@ -67,15 +70,21 @@ public class KeyboardController : MonoBehaviour
     public void WrongQuestion()
     {
         ClearTextArea();
+        print("No match!!");
+        textAreaAnimator.SetTrigger("Shake");
     }
 
+    [Button()]
     public void ClearTextArea()
     {
-        foreach (Transform c in textAreaGrid)
+        int count = textAreaGrid.childCount;
+        for (int i = 0; i < count; i++)
         {
-            c.SetParent(buttonAreaGrid, true);
+            Transform child = textAreaGrid.GetChild(0);
+            child.SetParent(buttonAreaGrid, true);
+            child.GetComponent<EmojiButton>().currPos = child.transform.position;
         }
-        
+
     }
 
     public void Send()
@@ -128,11 +137,15 @@ public class KeyboardController : MonoBehaviour
         }
 
         print("Match!!!");
-        
-        // It does match!!!
-        FadeOut();
-        
-        if (currTalkingBubble)
+
+        print($"Curr dialog is {currDialog.name}");
+        if (currDialog.isSpeakerDialogue)
+        {
+            NewsController.main.StartNews(selectedData.next);
+        }
+        else if (currTalkingBubble)
             currTalkingBubble.Talk(selectedData.next);
+        
+        FadeOut();
     }
 }

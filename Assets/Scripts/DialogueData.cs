@@ -5,12 +5,16 @@ using System.Linq;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Android;
+using UnityEngine.Events;
 
 public class DialogueData : MonoBehaviour
 {
     public List<BubbleCell> cells;
     public bool isConnected;
     public bool isMultipleChoice;
+    public UnityEvent eventAfterDone;
+
+    public bool secondTimeShowFast = true;
 
     [ShowIf("isConnected")]
     public DialogueData next;

@@ -17,6 +17,8 @@ public enum PersonState
 public class Person : MonoBehaviour
 {
     public bool isTalkable;
+    public bool findNewPosAfterReach = true;
+    public bool isSpeaker;
 
     [ShowIf("isTalkable")]
     public PersonDialog personDialog;
@@ -150,7 +152,8 @@ public class Person : MonoBehaviour
                     animationState = PersonState.Idle;
                     movementTimer = waitTime + Random.Range(-waitTimeRandomness, waitTimeRandomness);
                     // Find a new target position
-                    currTargetPos = GameManager.main.FindRandomPos();
+                    if (findNewPosAfterReach)
+                        currTargetPos = GameManager.main.FindRandomPos();
                 }
             }
             else

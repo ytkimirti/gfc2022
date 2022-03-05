@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PersonDialog : MonoBehaviour
 {
+    public bool isSpeakerDialogue;
     public DialogueData helloDialogue;
     public DialogueData[] options;
 
